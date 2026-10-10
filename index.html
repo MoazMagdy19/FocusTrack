@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FocusTrack AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-role="student">
+
+<!-- ============ HEADER ============ -->
+<header class="topbar no-print">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">◎</span>
+    <div>
+      <h1>FocusTrack AI</h1>
+      <p data-i18n="tagline">ركز أكتر... اتعلم أفضل</p>
+    </div>
+  </div>
+  <div class="role-toggle" role="group" aria-label="Role">
+    <button type="button" data-role-btn="student" class="active" data-i18n="roleStudent">طالب</button>
+    <button type="button" data-role-btn="teacher" data-i18n="roleTeacher">مدرس</button>
+  </div>
+</header>
+<div class="proto-banner no-print" data-i18n="protoBadge">نموذج تجريبي — جميع البيانات محاكاة</div>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav no-print" data-for="student" aria-label="Student">
+  <button type="button" data-view="s-home" class="active"><span class="ico">🏠</span><span data-i18n="navHome">الرئيسية</span></button>
+  <button type="button" data-view="s-track"><span class="ico">📷</span><span data-i18n="navTrack">متابعة التركيز</span></button>
+  <button type="button" data-view="s-stats"><span class="ico">📊</span><span data-i18n="navStats">إحصائياتي</span></button>
+  <button type="button" data-view="s-settings"><span class="ico">⚙️</span><span data-i18n="navSettings">الإعدادات</span></button>
+</nav>
+<nav class="nav no-print" data-for="teacher" aria-label="Teacher">
+  <button type="button" data-view="t-home" class="active"><span class="ico">🏠</span><span data-i18n="navHome">الرئيسية</span></button>
+  <button type="button" data-view="t-students"><span class="ico">👥</span><span data-i18n="navStudents">الطلاب</span></button>
+  <button type="button" data-view="t-class"><span class="ico">📊</span><span data-i18n="navClass">إحصائيات الفصل</span></button>
+  <button type="button" data-view="t-alerts"><span class="ico">🔔</span><span data-i18n="navAlerts">التنبيهات</span></button>
+  <button type="button" data-view="t-reports"><span class="ico">📄</span><span data-i18n="navReports">التقارير</span></button>
+</nav>
+
+<main>
+
+  <!-- ================= STUDENT: HOME ================= -->
+  <section class="view active" id="s-home" data-role="student">
+    <div class="grid two">
+      <article class="card focus-card">
+        <div class="cam-status js-cam-status"></div>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fg js-ring-fg" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="ring-center"><span class="ring-value js-focus-val">82%</span></div>
+        </div>
+        <p class="ring-label" data-i18n="focusNow">مستوى التركيز الحالي</p>
+        <div class="status-pill js-status"></div>
+        <p class="hint" data-i18n="estimated">مؤشر تركيز تقديري — تحليل تجريبي</p>
+        <button type="button" class="btn primary big js-start"></button>
+        <p class="hint" data-i18n="simNote">في المحاكاة: كل ثانيتين = دقيقة</p>
+      </article>
+
+      <article class="card">
+        <h2 data-i18n="sessionTitle">الحصة الحالية</h2>
+        <div class="durations js-durations"></div>
+      </article>
+    </div>
+    <div class="js-privacy"></div>
+  </section>
+
+  <!-- ================= STUDENT: TRACK ================= -->
+  <section class="view" id="s-track" data-role="student">
+    <div class="warn-banner" id="warnBanner" hidden>
+      <strong data-i18n="warnTitle">⚠️ مستوى التركيز منخفض</strong>
+      <span data-i18n="warnText">حاول العودة إلى متابعة الدرس.</span>
+    </div>
+
+    <div class="grid two">
+      <article class="card">
+        <h2 data-i18n="camTitle">معاينة الكاميرا (محاكاة)</h2>
+        <div class="camera" id="camera">
+          <span class="live-badge"><i></i><span data-i18n="simBadge">محاكاة</span></span>
+          <div class="scan"></div>
+          <svg class="face" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M20 200 C25 150 65 140 100 140 C135 140 175 150 180 200 Z" fill="#35588f"/>
+            <g class="head-g">
+              <rect x="88" y="118" width="24" height="28" rx="8" fill="#7ea6e0"/>
+              <ellipse cx="100" cy="80" rx="42" ry="50" fill="#9fc0f0"/>
+              <path d="M58 70 C58 30 142 30 142 70 C130 52 70 52 58 70Z" fill="#2b4a7a"/>
+              <ellipse cx="82" cy="80" rx="11" ry="8" fill="#fff"/>
+              <ellipse cx="118" cy="80" rx="11" ry="8" fill="#fff"/>
+              <circle class="pupil" cx="82" cy="80" r="4.5" fill="#0b1f3a"/>
+              <circle class="pupil" cx="118" cy="80" r="4.5" fill="#0b1f3a"/>
+              <path class="mouth" d="M88 108 Q100 114 112 108" stroke="#2b4a7a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div class="face-box"><b></b><b></b><b></b><b></b></div>
+          <span class="cam-chip"><span class="js-focus-val">82%</span></span>
+        </div>
+        <p class="hint" data-i18n="noIdentity">لا يتم التعرف على هوية الطالب — الصورة توضيحية فقط.</p>
+      </article>
+
+      <article class="card">
+        <h2 data-i18n="aiTitle">تحليل الذكاء الاصطناعي (تجريبي)</h2>
+        <ul class="ai-list">
+          <li><span data-i18n="eyeLbl">👁 اتجاه العين</span><b id="aiEye"></b></li>
+          <li><span data-i18n="faceLbl">🙂 تعبير الوجه</span><b id="aiFace"></b></li>
+          <li><span data-i18n="headLbl">🧑 حركة الرأس</span><b id="aiHead"></b></li>
+        </ul>
+
+        <h3 data-i18n="calcTitle">حساب مؤشر التركيز (محاكاة)</h3>
+        <div class="calc">
+          <div class="calc-row"><span><span data-i18n="eyeShort">اتجاه العين</span> <small>40%</small></span><div class="progress"><span id="barEye"></span></div><b id="valEye"></b></div>
+          <div class="calc-row"><span><span data-i18n="headShort">حركة الرأس</span> <small>30%</small></span><div class="progress"><span id="barHead"></span></div><b id="valHead"></b></div>
+          <div class="calc-row"><span><span data-i18n="faceShort">تعبير الوجه</span> <small>30%</small></span><div class="progress"><span id="barExpr"></span></div><b id="valExpr"></b></div>
+        </div>
+        <div class="calc-result"><span data-i18n="calcResult">النتيجة</span><strong id="calcResult"></strong></div>
+      </article>
+    </div>
+
+    <article class="card sim-card">
+      <h2 data-i18n="simTitle">محاكاة التشتت</h2>
+      <p class="hint" data-i18n="simHelp">تجربة توضيحية فقط: اضغط مرة لخفض التركيز، ومرة ثانية لظهور تنبيه الطالب.</p>
+      <div class="btn-row">
+        <button type="button" class="btn warn" id="btnDistract" data-i18n="simDist">محاكاة التشتت</button>
+        <button type="button" class="btn success" id="btnReturn" data-i18n="backFocus">العودة للتركيز</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= STUDENT: STATS ================= -->
+  <section class="view" id="s-stats" data-role="student">
+    <div class="grid two">
+      <article class="card">
+        <h2 data-i18n="sessionTitle">الحصة الحالية</h2>
+        <div class="durations js-durations"></div>
+      </article>
+      <article class="card">
+        <h2 data-i18n="histTitle">مؤشر التركيز خلال الحصة</h2>
+        <div id="histChart"></div>
+        <div class="mini-stats" id="histStats"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= STUDENT: SETTINGS ================= -->
+  <section class="view" id="s-settings" data-role="student">
+    <article class="card">
+      <h2 data-i18n="setTitle">الإعدادات</h2>
+      <div class="setting"><span data-i18n="setMonitor">تشغيل/إيقاف متابعة التركيز</span><label class="switch"><input type="checkbox" id="setMonitor" checked><i></i></label></div>
+      <div class="setting"><span data-i18n="setAlerts">التنبيهات</span><label class="switch"><input type="checkbox" id="setAlerts" checked><i></i></label></div>
+      <div class="setting"><span data-i18n="setSound">صوت التنبيه</span><label class="switch"><input type="checkbox" id="setSound" checked><i></i></label></div>
+      <div class="setting"><span data-i18n="setDark">الوضع الداكن</span><label class="switch"><input type="checkbox" id="setDark"><i></i></label></div>
+      <div class="setting"><span data-i18n="setLang">اللغة</span>
+        <div class="seg" role="group">
+          <button type="button" data-lang-btn="ar" class="active">العربية</button>
+          <button type="button" data-lang-btn="en">English</button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= TEACHER: HOME ================= -->
+  <section class="view" id="t-home" data-role="teacher">
+    <div class="page-head">
+      <h2 data-i18n="tTitle">لوحة متابعة الطلاب</h2>
+      <button type="button" class="btn danger js-end-class" data-i18n="endClass">إنهاء الحصة</button>
+    </div>
+    <div class="ov-stats js-ov-stats"></div>
+    <h3 data-i18n="navAlerts">التنبيهات</h3>
+    <div class="js-alerts"></div>
+    <p class="hint" data-i18n="teacherOnly">يرى المدرس الإحصائيات التقديرية فقط — بدون أي فيديو.</p>
+  </section>
+
+  <!-- ================= TEACHER: STUDENTS ================= -->
+  <section class="view" id="t-students" data-role="teacher">
+    <div class="page-head"><h2 data-i18n="tTitle">لوحة متابعة الطلاب</h2></div>
+    <div class="stu-grid" id="stuGrid"></div>
+    <p class="hint" data-i18n="teacherOnly">يرى المدرس الإحصائيات التقديرية فقط — بدون أي فيديو.</p>
+  </section>
+
+  <!-- ================= TEACHER: CLASS ================= -->
+  <section class="view" id="t-class" data-role="teacher">
+    <div class="page-head"><h2 data-i18n="navClass">إحصائيات الفصل</h2></div>
+    <div class="ov-stats js-ov-stats"></div>
+    <article class="card">
+      <h3 data-i18n="chartTitle">التركيز مقابل التشتت</h3>
+      <div id="classChart"></div>
+    </article>
+  </section>
+
+  <!-- ================= TEACHER: ALERTS ================= -->
+  <section class="view" id="t-alerts" data-role="teacher">
+    <div class="page-head"><h2 data-i18n="navAlerts">التنبيهات</h2></div>
+    <div class="js-alerts"></div>
+    <p class="hint" data-i18n="teacherOnly">يرى المدرس الإحصائيات التقديرية فقط — بدون أي فيديو.</p>
+  </section>
+
+  <!-- ================= TEACHER: REPORTS ================= -->
+  <section class="view" id="t-reports" data-role="teacher">
+    <div class="page-head no-print"><h2 data-i18n="navReports">التقارير</h2></div>
+    <article class="card report-ready no-print" id="reportState"></article>
+    <article class="card report" id="reportBox" hidden></article>
+  </section>
+
+</main>
+
+<footer class="disclaimer no-print">
+  <p data-i18n="disc">مؤشر تركيز تقديري — تحليل تجريبي. النتائج تساعد على المتابعة ولا تمثل تقييمًا نفسيًا أو طبيًا.</p>
+</footer>
+
+<!-- ============ STUDENT ALERT MODAL ============ -->
+<div class="modal" id="alertModal" hidden role="alertdialog" aria-modal="true" aria-labelledby="alertTitle">
+  <div class="modal-card">
+    <h2 id="alertTitle" data-i18n="alertTitle">⚠️ تنبيه</h2>
+    <p data-i18n="alertL1">يبدو أن تركيزك منخفض.</p>
+    <p data-i18n="alertL2">حاول العودة إلى متابعة الدرس.</p>
+    <button type="button" class="btn primary big" id="alertOk" data-i18n="alertOk">حسنًا، سأركز</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<!-- Privacy card template (reused in student + teacher views) -->
+<template id="privacyTpl">
+  <article class="card privacy">
+    <h2 data-i18n="privTitle">🔒 الخصوصية أولًا</h2>
+    <ul class="priv-text">
+      <li data-i18n="priv1">تتم معالجة بيانات الكاميرا على جهاز الطالب.</li>
+      <li data-i18n="priv2">لا يتم حفظ أو إرسال فيديو الكاميرا.</li>
+      <li data-i18n="priv3">يتم استخدام النتائج الإحصائية فقط لمتابعة مستوى التركيز.</li>
+    </ul>
+    <div class="chips">
+      <span class="chip">🟢 Video Recording: OFF</span>
+      <span class="chip">🟢 Cloud Upload: OFF</span>
+      <span class="chip">🟢 Local Processing: ON</span>
+    </div>
+    <p class="hint" data-i18n="privProto">هذا تمثيل توضيحي للخصوصية في النموذج التجريبي فقط.</p>
+  </article>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>
